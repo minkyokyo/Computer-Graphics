@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>computer graphics - programming assignment1</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <style type="text/css">
+      body {
+        background-color: #bfe3dd;
+        color: rgb(255, 255, 255);
+      }
+      #info {
+        position: absolute;
+        text-align: center;
+        z-index: 1; /* TODO Solve this in HTML */
+      }
+      a {
+        color: #2983ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="info">
+      "Q"는 물체 이동 <br />
+      "W"는 카메라 이동
+    </div>
+    <div id="myContainer"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/node_modules/three/build/three.module.js",
+          "three/addons/": "/node_modules/three/examples/jsm"
+        }
+      }
+    </script>
+    <script type="module" src="/index.js"></script>
+  </body>
+</html>

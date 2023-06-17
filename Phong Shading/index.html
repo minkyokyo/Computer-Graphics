@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>CG Practice 2</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+  </head>
+  <body>
+    <div id="myContainer"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../node_modules/three/build/three.module.js",
+          "three/addons/": "../node_modules/three/examples/jsm"
+        }
+      }
+    </script>
+
+    <script id="vertexShader" type="x-shader/x-vertex">
+
+      precision mediump float;
+      precision mediump int;
+
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+      // Assignment TO DO //
+      // get your model matrix
+
+      uniform mat4 modelMatrix; // 모델 트랜스폼 매트릭스
+      uniform mat4 normalMatrix; // 노말 트랜스폼 시키는 매트릭스
+
+      attribute vec3 position;
+      attribute vec3 normal;
+      attribute vec2 uv;
+
+      varying vec3 vPosition;
+      varying vec3 vNormal; // 이거를 fragmentshader에 전달해주어야함.
+
+      void main()	{
+          // Assignment TO DO //
+          // choose your lighting space (world or camera space) : world
+
+          // transform position and normal accordingly
+
+          // 포지션 월드 스페이스로
+          vPosition = (modelMatrix*vec4(position,1.0)).xyz;
+
+          //노말 월드스페이스로
+          vNormal= (normalMatrix * vec4(normal,0.0)).xyz;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+      }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+
+      precision mediump float;
+      precision mediump int;
+
+      uniform float time;
+      // Assignment TO DO //
+      // get Point Light position
+      uniform vec3 lightPosition;
+
+      // get Point Light coloT
+      uniform vec3 lightColor;
+
+      // get Amient Light color
+      uniform vec3 ambientColor;
+
+      // get Camera position
+      uniform vec3 cameraPosition;
+
+      // get Material color
+      uniform vec3 materialColor;
+
+      //get Shininess
+      uniform float shininess;
+
+      varying vec3 vPosition;
+      // Assignment TO DO //
+      // get necessary attributes (interpolated)
+      varying vec3 vNormal;
+
+      void main()	{
+
+        // compute Phong Lighting
+
+        //-- Normal 벡터--
+        vec3 N = normalize(vNormal);
+
+        //-- Light 벡터-- : 빛 위치 - 표면
+        vec3 L = normalize(lightPosition-vPosition) ;
+
+        //-- View 벡터-- : 카메라 위치 - 표면
+        vec3 V = normalize(cameraPosition-vPosition);
+
+        //-- Reflector 벡터-- :
+        vec3 R = 2.0 * dot(N,L)*N - L;
+
+        //compute the diffuse term
+        float diffuse = max(dot(L, N), 0.0);
+        vec3 diffuseTerm = diffuse*vec3(materialColor.x * lightColor.x , materialColor.y * lightColor.y, materialColor.z * lightColor.z);
+
+        //compute the specular term
+        float specular =pow(max(dot(R,V),0.0),shininess);
+        vec3 specularTerm = specular*vec3(materialColor.x*lightColor.x, materialColor.y*lightColor.y,materialColor.z*lightColor.z);
+
+        //compute the ambient term
+        vec3 ambientTerm = vec3(materialColor.x * ambientColor.x , materialColor.y * ambientColor.y, materialColor.z * ambientColor.z);
+
+        //-- 최종 색깔 결정 : diffuse Term + specularTerm + ambientTerm
+        vec3 final_color = diffuseTerm+ambientTerm+specularTerm;
+
+        gl_FragColor.rgb = final_color;
+        gl_FragColor.a = 1.0;
+
+      }
+    </script>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

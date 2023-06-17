@@ -1,7 +1,12 @@
-# Computer-Graphics
-Three.js 이용
+# Graphics
 
-![image](https://user-images.githubusercontent.com/71928522/203534849-2799691b-c2c9-4821-814b-d8bce7f4ec36.png)
+1. [Cube Transformation](www.naver.com)
+2. [Phong Shading](wwww.naver.com)
+3. [Environment map](www.naver.com)
 
+# Three.js 설치 방법
 
-![image](https://user-images.githubusercontent.com/71928522/203534899-dbe83779-327b-4653-91f5-8dcdc32a2290.png)
+npm 설치 -> https://nodejs.org/ko/download  
+three.js 설치 -> npm install three
+
+"import \* as THREE from 'three';" 를 통해 라이브러리 불러오기!

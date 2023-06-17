@@ -1,5 +1,4 @@
-# Phong Shading
-![image](https://github.com/minkyokyo/Computer-Graphics/assets/71928522/5aeab524-7887-4433-b61f-81b7684fe8a9)
+# Environment map
+![image](https://github.com/minkyokyo/Computer-Graphics/assets/71928522/64957bcb-1164-45d7-ab63-cec43a684274)  
 
-# Shader 프로그램 작성
-html파일에서 적용함.
+fragment shader에서 Blinn/Newell Latitude Mapping 방법을 이용해서 texture 좌표를 얻구 Phong shading 함.

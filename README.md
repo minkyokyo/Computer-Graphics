@@ -2,7 +2,7 @@
 
 1. [Cube Transformation](https://github.com/minkyokyo/Computer-Graphics/tree/main/Cube%26Camera%20Transformation)
 2. [Phong Shading](wwww.naver.com)
-3. [Environment map](www.naver.com)
+3. [Environment map](https://github.com/minkyokyo/Computer-Graphics/tree/main/Environment%20map)
 
 # Three.js 설치 방법
 
